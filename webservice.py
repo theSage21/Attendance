@@ -1,10 +1,20 @@
 import os
 import json
+import tools
 import bottle
 
 # READ CONFIG
-with open('config.json', 'r') as fl:
-    CFG = json.loads(fl.read())
+def load_cfg():
+    with open('config.json', 'r') as fl:
+        CFG = json.loads(fl.read())
+    return CFG
+
+def save_cfg(cfg):
+    with open('config.json', 'w') as fl:
+        json.dump(cfg, fl, indent=4)
+
+CFG = load_cfg()
+save_cfg(CFG)
 
 # ------------------------------------------------------------
 # ------------------------------------------------------------
@@ -57,12 +67,32 @@ def user():
 
 @app.post('/user/login')
 def user_auth():
-    return {'status': True, 'token': 'asdf'}
+    global CFG
+    json = bottle.request.json
+    user, pasword = json['user'], json['password']
+    status, token, CFG = tools.login_user(CFG, user, password)
+    save_cfg(CFG)
+    return {'status': status, 'token': token}
 
 
 @app.post('/user/logout')
 def user_logout():
-    return {'status': True}
+    global CFG
+    json = bottle.request.json
+    token = json['token']
+    status = tools.logout_user(CFG, token)
+    save_cfg(CFG)
+    return {'status': status}
+
+
+@app.post('/user/add')
+def user_signup():
+    global CFG
+    json = bottle.request.json
+    user, pasword = json['user'], json['password']
+    status, CFG = tools.add_user(CFG, user, password)
+    save_cfg(CFG)
+    return {'status': status}
 
 # --------------------------------------------------------------
 # --------------------------------------------------------------

@@ -5,5 +5,7 @@
         "models": "models",
         "static": "static",
         "training": "training"
-    }
+    },
+    "tokens": {},
+    "users": {}
 }
