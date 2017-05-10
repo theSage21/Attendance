@@ -1,15 +1,23 @@
 import os
+import json
 import bottle
 
-TEMPLATES = 'templates'
-CLASS_PHOTOS = 'photos'
-MODELS = 'models'
-TRAINING = 'training'
+# READ CONFIG
+with open('config.json', 'r') as fl:
+    CFG = json.loads(fl.read())
+
+# ------------------------------------------------------------
+# ------------------------------------------------------------
+# --------------HELPERS for WEB
+# ------------------------------------------------------------
+# ------------------------------------------------------------
 
 
 def render(template, data=None):
+    global CFG
+    template_dir = CFG['directories']['templates']
     data = data if data is not None else dict()
-    with open(os.path.join(TEMPLATES, template)) as fl:
+    with open(os.path.join(template_dir, template)) as fl:
         html = fl.read()
     return bottle.template(html, **data)
 

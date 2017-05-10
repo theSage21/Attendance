@@ -1,0 +1,8 @@
+{
+    "directories": {
+        "templates": "templates",
+        "class_photos": "class_photos",
+        "models": "models",
+        "training": "training"
+    }
+}
