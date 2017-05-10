@@ -1,9 +1,10 @@
 import os
-import tools
 import bottle
 
 TEMPLATES = 'templates'
 CLASS_PHOTOS = 'photos'
+MODELS = 'models'
+TRAINING = 'training'
 
 
 def render(template, data=None):
@@ -13,6 +14,11 @@ def render(template, data=None):
     return bottle.template(html, **data)
 
 
+# --------------------------------------------------------------
+# --------------------------------------------------------------
+# ------------------ROUTES
+# --------------------------------------------------------------
+# --------------------------------------------------------------
 app = bottle.Bottle()
 
 
@@ -21,20 +27,31 @@ def home():
     return render('home.html')
 
 
-@app.post('/newimage/')
-def newimage():
-    image = bottle.request.files.get('classphoto')
-    image.save(os.path.join(CLASS_PHOTOS, image.filename))
-    return {'saved': True}
+@app.post('/image/upload')
+def upload_image():
+    return {'ident': None}
 
 
-@app.get('/label/')
-def get_attendance():
-    images = os.listdir(CLASS_PHOTOS)
-    names = [tools.get_names(i) for i in images]
-    return {'images': images, 'names': names}
+@app.post('/image/label')
+def label_image():
+    return {'status': 'Success'}
 
 
-@app.get('/static/<filename>')
-def server_static(filename):
-    return bottle.static_file(filename, root='static')
+@app.post('/image/mark')
+def mark_attendance():
+    return {'present': []}
+
+
+@app.get('/user')
+def user():
+    return {}
+
+
+@app.post('/user/login')
+def user_auth():
+    return {'status': True, 'token': 'asdf'}
+
+
+@app.post('/user/logout')
+def user_logout():
+    return {'status': True}
