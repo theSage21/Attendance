@@ -69,7 +69,7 @@ def user():
 def user_auth():
     global CFG
     json = bottle.request.json
-    user, pasword = json['user'], json['password']
+    user, password = json['user'], json['password']
     status, token, CFG = tools.login_user(CFG, user, password)
     save_cfg(CFG)
     return {'status': status, 'token': token}
@@ -80,16 +80,16 @@ def user_logout():
     global CFG
     json = bottle.request.json
     token = json['token']
-    status = tools.logout_user(CFG, token)
+    CFG = tools.logout_user(CFG, token)
     save_cfg(CFG)
-    return {'status': status}
+    return {'status': True}
 
 
-@app.post('/user/add')
+@app.post('/user/signup')
 def user_signup():
     global CFG
     json = bottle.request.json
-    user, pasword = json['user'], json['password']
+    user, password = json['user'], json['password']
     status, CFG = tools.add_user(CFG, user, password)
     save_cfg(CFG)
     return {'status': status}

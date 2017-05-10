@@ -6,6 +6,12 @@
         "static": "static",
         "training": "training"
     },
-    "tokens": {},
-    "users": {}
+    "tokens": {
+        "ny7dq2xddj4mb1lr3a07zak6s37im79dbe6yc1jvj1kl5xw810": "arjoonn",
+        "643qrlyllymom1pqe0kfwukjsrxtora67u668ft9elkv8pdtcq": "arjoonn"
+    },
+    "users": {
+        "arjoonn": "sharma",
+        "manni": "sharma"
+    }
 }

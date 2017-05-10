@@ -21,9 +21,12 @@
 	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	  <link rel="stylesheet" href="/static/css/normalize.css">
 	  <link rel="stylesheet" href="/static/css/skeleton.css">
+	  <link rel="stylesheet" href="/static/css/main.css">
+
 	  <!-- Scripts
 	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src='/static/main.js'></script>
 	</head>
     <body>
         <div class='container'>
@@ -31,13 +34,19 @@
                 <div class='twelve columns'>
                     <b>Attendance</b>  -- [
                     <a href='/'>Home</a> ] - [
-                    <a href='/user/login'>Login</a> ] - [
-                    <a href='/user/login'>Logout</a> ]
+                    <a href='#' id='signup'>Signup</a> ] - [
+                    <a href='#' id='login'>Login</a> ] - [
+                    <a href='#' id='logout'>Logout</a> ]
                 </div>
             </div>
         </div>
         <hr>
         <div class='container'>
+            <div id = "inputform">
+                    <input type = "text" id = "name" placeholder = "name" name = "name">
+                    <input type = "password" id = "password" name = "upass" placeholder = "***">
+                    <button id='go_button'></button>
+            </div>
             <p>YEAH!</p>
         </div>
     </body>
