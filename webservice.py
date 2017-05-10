@@ -63,3 +63,15 @@ def user_auth():
 @app.post('/user/logout')
 def user_logout():
     return {'status': True}
+
+# --------------------------------------------------------------
+# --------------------------------------------------------------
+# ------------------MAIN
+# --------------------------------------------------------------
+# --------------------------------------------------------------
+@app.get('/static/<path:path>')
+def static_server(path):
+    return bottle.static_file(path, root=CFG['directories']['static'])
+
+if __name__ == '__main__':
+    bottle.run(app, host='localhost', port=8080, debug=True)

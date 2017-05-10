@@ -3,6 +3,7 @@
         "templates": "templates",
         "class_photos": "class_photos",
         "models": "models",
+        "static": "static",
         "training": "training"
     }
 }
