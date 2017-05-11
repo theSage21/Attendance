@@ -43,6 +43,13 @@
         </div>
         <hr>
         <div class='container'>
+            <div id = "imageform">
+                <form action="/image/upload" method="post" enctype="multipart/form-data">
+                    Select a file: <input type="file" name="upload" />
+                    <button value="Upload" />
+                </form>
+                <hr>
+            </div>
             <div id = "inputform">
                 <input type = "text" id = "name" placeholder = "name" name = "name">
                 <select id='kind'>

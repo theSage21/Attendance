@@ -10,6 +10,14 @@ $( document ).ready(function() {
             $("#username").html(data['name'] + ' ' + data['kind']);
         });
     }
+    function showimageform(){
+      $("#imageform").fadeIn();
+      $("#imageform").css({"visibility":"visible","display":"block"});
+    }
+    function hideimageform(){
+      $("#imageform").fadeOut();
+      $("#imageform").css({"visibility":"hidden","display":"none"});
+    }
     function showinputform()
     { $("#inputform").fadeIn();
       $("#inputform").css({"visibility":"visible","display":"block"});
@@ -65,8 +73,10 @@ $( document ).ready(function() {
     });
     $("#logout").click(function (){
         $("#posturl").val('/user/logout');
+        console.log(document.user_token);
         var data = JSON.stringify({'token': document.user_token});
-        postit(data, function(data) { console.log(data); });
+        var url = $("#posturl").val();
+        postit(url, data, function(data) { console.log(data); });
         $("#username").html('ANON');
     });
 });
