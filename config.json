@@ -1,20 +1,19 @@
 {
+    "tokens": {
+    },
     "directories": {
-        "models": "models",
+        "class_photos": "class_photos",
         "training": "training",
         "templates": "templates",
-        "static": "static",
-        "class_photos": "class_photos"
+        "models": "models",
+        "static": "static"
     },
     "users": {
         "arjoonn": {
-            "kind": "s",
-            "pwd": "sharma"
+            "images": [],
+            "pwd": "sharma",
+            "labels": [],
+            "kind": "s"
         }
-    },
-    "tokens": {
-        "ixaq46b48q0rjkfinnxz4paynt6emvabf73zy83u01mropbg0x": "arjoonn",
-        "d56zms0gs2gqve6fgmpp63iqhsmudlxldi45dzcwuovbf1p4i1": "arjoonn",
-        "e182081i61bfjkbs72nlrak8naqnyfjm0l6l9que68d3rw0qja": "arjoonn"
     }
 }

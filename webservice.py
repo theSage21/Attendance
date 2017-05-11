@@ -1,23 +1,7 @@
 import os
-import json
 import tools
 import bottle
 
-
-# READ CONFIG
-def load_cfg():
-    with open('config.json', 'r') as fl:
-        CFG = json.loads(fl.read())
-    return CFG
-
-
-def save_cfg(cfg):
-    with open('config.json', 'w') as fl:
-        json.dump(cfg, fl, indent=4)
-
-
-CFG = load_cfg()
-save_cfg(CFG)
 
 # ------------------------------------------------------------
 # ------------------------------------------------------------
@@ -27,9 +11,9 @@ save_cfg(CFG)
 
 
 def render(template, data=None):
-    global CFG
-    template_dir = CFG['directories']['templates']
     data = data if data is not None else dict()
+    with tools.Config() as config:
+        template_dir = config.C['directories']['templates']
     with open(os.path.join(template_dir, template)) as fl:
         html = fl.read()
     return bottle.template(html, **data)
@@ -65,40 +49,34 @@ def mark_attendance():
 
 @app.post('/user')
 def user():
-    global CFG
     json = bottle.request.json
     token = json['token']
-    status, kind, name = tools.get_user_details(CFG, token)
-    return {'status': status, 'name': name, 'kind': kind}
+    status, details = tools.get_user_details(token)
+    details.update({'status': status})
+    return details
 
 
 @app.post('/user/login')
-def user_auth():
-    global CFG
+def user_login():
     json = bottle.request.json
     user, password = json['user'], json['password']
-    status, token, CFG = tools.login_user(CFG, user, password)
-    save_cfg(CFG)
+    status, token = tools.login_user(user, password)
     return {'status': status, 'token': token}
 
 
 @app.post('/user/logout')
 def user_logout():
-    global CFG
     json = bottle.request.json
     token = json['token']
-    CFG = tools.logout_user(CFG, token)
-    save_cfg(CFG)
+    tools.logout_user(token)
     return {'status': True}
 
 
 @app.post('/user/signup')
 def user_signup():
-    global CFG
     json = bottle.request.json
     user, password, kind = json['user'], json['password'], json['kind']
-    status, CFG = tools.add_user(CFG, user, password, kind)
-    save_cfg(CFG)
+    status = tools.add_user(user, password, kind)
     return {'status': status}
 
 # --------------------------------------------------------------
@@ -110,7 +88,9 @@ def user_signup():
 
 @app.get('/static/<path:path>')
 def static_server(path):
-    return bottle.static_file(path, root=CFG['directories']['static'])
+    with tools.Config() as config:
+        root = config.C['directories']['static']
+    return bottle.static_file(path, root=root)
 
 
 if __name__ == '__main__':

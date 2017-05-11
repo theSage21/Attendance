@@ -27,6 +27,7 @@ $( document ).ready(function() {
         return {'user': name, 'password': pwd, 'kind': kind};
     }
     function postit(url, data, success) {
+        console.log(url);
         $.ajax({type: 'POST',
                 url: url,
                 data: data,
@@ -36,36 +37,36 @@ $( document ).ready(function() {
         });
     };
     // -----------------------------------------------------------------------
-    $("#signup").click(function (){
-        var url = '/user/signup';
-        $("#go_button").html('Sign Up');
-        $("#go_button").click(function (){
-            var data = JSON.stringify(getformdata());
-            postit(url, data, function(data) {
-                console.log(data); 
+    $("#go_button").click(function (){
+        var data = JSON.stringify(getformdata());
+        var url = $("#posturl").val();
+        postit(url, data, function(data) {
+            console.log(data); 
+            if($('#go_button').html() == 'Sign Up'){
                 alert("Signup Successful. You can login now.");
-            });
-            hideinputform();
+            } else {
+                document.user_token = data.token;
+                currentuser(data.token);
+            }
         });
+        hideinputform();
+    });
+    $("#signup").click(function (){
+        $("#posturl").val('/user/signup');
+        $("#kind").css({"visibility":"visible","display":"block"});
+        $("#go_button").html('Sign Up');
         showinputform();
     });
     $("#login").click(function (){
-        var url = '/user/login';
+        $("#posturl").val('/user/login');
+        $("#kind").css({"visibility":"hidden","display":"none"});
         $("#go_button").html('Login');
-        $("#go_button").click(function (){
-            var data = JSON.stringify(getformdata());
-            postit(url, data, function(data) {
-                console.log(data); 
-                document.user_token = data.token;
-                currentuser(data.token);
-            });
-            hideinputform();
-        });
         showinputform();
     });
     $("#logout").click(function (){
-        var url = '/user/logout';
+        $("#posturl").val('/user/logout');
         var data = JSON.stringify({'token': document.user_token});
-        postit(url, data, function(data) { console.log(data); });
+        postit(data, function(data) { console.log(data); });
+        $("#username").html('ANON');
     });
 });
