@@ -47,7 +47,7 @@
             <div id = "imageform" class='row'>
                 <form action='/image/upload' method="post" enctype="multipart/form-data" id='imageupload_form'>
                     <input type="file" name="upload" class='six columns'/>
-                    <input type='hidden' name='token' value='' id='usertoken'/>
+                    <input type='hidden' name='usertoken' value='' id='usertoken'/>
                     <button id='imageuploadbutton' class='two columns'>Upload</button>
                 </form>
             </div>
@@ -60,6 +60,8 @@
                 <input type = "password" id = "password" name = "upass" placeholder = "********" class='two columns'>
                 <input type='hidden' val='' id='posturl'>
                 <button id='go_button' class='two columns'></button>
+            </div>
+            <div id='gallery' class='row'>
             </div>
             <p>YEAH!</p>
         </div>

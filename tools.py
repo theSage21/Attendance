@@ -28,6 +28,13 @@ def letter():
     return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
 
 
+def add_image(path, token):
+    with Config() as config:
+        if token in config.C['tokens']:
+            name = config.C['tokens'][token]
+            config.C['users'][name]['images'].append(path)
+
+
 def get_user_details(token):
     with Config() as config:
         if token not in config.C['tokens']:
@@ -73,14 +80,4 @@ def add_user(name, password, kind):
             status = True
         else:
             status = False
-    return status
-
-
-def add_image(config, imagepath, token):
-    with Config() as config:
-        status = False
-        if token in config.C['tokens']:
-            name = config.C['tokens'][token]
-            config.C['users'][name]['images'].append(imagepath)
-            status = True
     return status
