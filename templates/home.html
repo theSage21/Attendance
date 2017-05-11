@@ -34,6 +34,7 @@
                 <div class='twelve columns'>
                     <b>Attendance</b>  -- [
                     <a href='/'>Home</a> ] - [
+                    <a href='#' id='username'>ANON</a> ] - [
                     <a href='#' id='signup'>Signup</a> ] - [
                     <a href='#' id='login'>Login</a> ] - [
                     <a href='#' id='logout'>Logout</a> ]
@@ -44,6 +45,10 @@
         <div class='container'>
             <div id = "inputform">
                     <input type = "text" id = "name" placeholder = "name" name = "name">
+                    <select id='kind'>
+                        <option value='s'>Student</option>
+                        <option value='t'>Teacher</option>
+                    </select>
                     <input type = "password" id = "password" name = "upass" placeholder = "***">
                     <button id='go_button'></button>
             </div>

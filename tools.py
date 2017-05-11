@@ -1,17 +1,31 @@
 import random
 
-def login_user(config, username, password):
-    users = config['users']
-    if username not in users:
-        status = None
+
+def letter():
+    return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
+
+
+def get_user_details(config, token):
+    if token not in config['tokens']:
+        kind, name, status = None, None, False
     else:
-        pwd = config['users'][username]
-        status = password == pwd
+        name = config['tokens'][token]
+        kind = config['users'][name]['kind']
+        status = True
+    return status, kind, name
+
+
+def login_user(config, username, password):
+    token, status = None, None
+    if username in config['users']:
+        pwd = config['users'][username]['pwd']
+        status = (password == pwd)
+    # ----------------
     if status:
-        token = ''.join(random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
-                for _ in range(50))
+        token = ''.join(letter() for _ in range(50))
         config['tokens'][token] = username
     return status, token, config
+
 
 def logout_user(config, token):
     if token in config['tokens']:
@@ -19,9 +33,10 @@ def logout_user(config, token):
     return config
 
 
-def add_user(config, name, password):
+def add_user(config, name, password, kind):
     if name not in config['users']:
-        config['users'][name] = password
+        config['users'][name] = {'pwd': password,
+                                 'kind': kind}
         status = True
     else:
         status = False

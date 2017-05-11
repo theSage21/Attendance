@@ -3,15 +3,18 @@ import json
 import tools
 import bottle
 
+
 # READ CONFIG
 def load_cfg():
     with open('config.json', 'r') as fl:
         CFG = json.loads(fl.read())
     return CFG
 
+
 def save_cfg(cfg):
     with open('config.json', 'w') as fl:
         json.dump(cfg, fl, indent=4)
+
 
 CFG = load_cfg()
 save_cfg(CFG)
@@ -60,9 +63,13 @@ def mark_attendance():
     return {'present': []}
 
 
-@app.get('/user')
+@app.post('/user')
 def user():
-    return {}
+    global CFG
+    json = bottle.request.json
+    token = json['token']
+    status, kind, name = tools.get_user_details(CFG, token)
+    return {'status': status, 'name': name, 'kind': kind}
 
 
 @app.post('/user/login')
@@ -89,8 +96,8 @@ def user_logout():
 def user_signup():
     global CFG
     json = bottle.request.json
-    user, password = json['user'], json['password']
-    status, CFG = tools.add_user(CFG, user, password)
+    user, password, kind = json['user'], json['password'], json['kind']
+    status, CFG = tools.add_user(CFG, user, password, kind)
     save_cfg(CFG)
     return {'status': status}
 
@@ -99,9 +106,12 @@ def user_signup():
 # ------------------MAIN
 # --------------------------------------------------------------
 # --------------------------------------------------------------
+
+
 @app.get('/static/<path:path>')
 def static_server(path):
     return bottle.static_file(path, root=CFG['directories']['static'])
+
 
 if __name__ == '__main__':
     bottle.run(app, host='localhost', port=8080, debug=True)

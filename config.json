@@ -1,17 +1,20 @@
 {
     "directories": {
-        "templates": "templates",
-        "class_photos": "class_photos",
         "models": "models",
+        "training": "training",
+        "templates": "templates",
         "static": "static",
-        "training": "training"
-    },
-    "tokens": {
-        "ny7dq2xddj4mb1lr3a07zak6s37im79dbe6yc1jvj1kl5xw810": "arjoonn",
-        "643qrlyllymom1pqe0kfwukjsrxtora67u668ft9elkv8pdtcq": "arjoonn"
+        "class_photos": "class_photos"
     },
     "users": {
-        "arjoonn": "sharma",
-        "manni": "sharma"
+        "arjoonn": {
+            "kind": "s",
+            "pwd": "sharma"
+        }
+    },
+    "tokens": {
+        "ixaq46b48q0rjkfinnxz4paynt6emvabf73zy83u01mropbg0x": "arjoonn",
+        "d56zms0gs2gqve6fgmpp63iqhsmudlxldi45dzcwuovbf1p4i1": "arjoonn",
+        "e182081i61bfjkbs72nlrak8naqnyfjm0l6l9que68d3rw0qja": "arjoonn"
     }
 }
