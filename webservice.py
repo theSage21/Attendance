@@ -35,12 +35,15 @@ def home():
 @app.post('/image/upload')
 def upload_image():
     img = bottle.request.files.get('upload')
-    name = ''.join(tools.letter() for _ in range(50))
     ext = img.filename.split('.')[-1]
-    name = name + ext
     with tools.Config() as config:
         folder = config.C['directories']['photos']
-        path = os.path.join(folder, name)
+    while True:
+        name = ''.join(tools.letter() for _ in range(50))
+        name = name + ext
+        if name not in os.listdir(folder):
+            break
+    path = os.path.join(folder, name)
     img.save(path)
     return {'ident': name}
 

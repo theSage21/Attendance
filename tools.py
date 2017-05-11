@@ -49,7 +49,10 @@ def login_user(username, password):
             status = (password == pwd)
         # ----------------
         if status:
-            token = ''.join(letter() for _ in range(50))
+            while True:
+                token = ''.join(letter() for _ in range(50))
+                if token not in config.C['tokens']:
+                    break
             config.C['tokens'][token] = username
     return status, token
 
