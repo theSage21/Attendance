@@ -1,29 +1,18 @@
 {
-    "tokens": {
-        "i1u6dstu9wfhmni9uxrrb9ieoi3liqzub4z1lo3mwpsappblln": "arjoonn",
-        "0i0sjwk7oqo3paoqps1b34xxoeg5i3hvv21qsvw6l2tv2z42xe": "arjoonn",
-        "928bdrh50kmhw9ykfg7doiffs5o3kxp1lte6orqqo1lklu2fum": "arjoonn",
-        "vowy9pqcfx5kmyqcxiqa1zulkjehv41nsma2kr82zc74nd73i4": "arjoonn"
-    },
-    "directories": {
-        "models": "models",
-        "templates": "templates",
-        "training": "training",
-        "static": "static",
-        "photos": "photos"
-    },
     "users": {
         "arjoonn": {
             "kind": "Student",
-            "labels": [],
             "pwd": "sharma",
-            "images": []
-        },
-        "2arjoonn": {
-            "kind": "Student",
             "images": [],
-            "pwd": "sharma",
             "labels": []
         }
+    },
+    "tokens": {},
+    "directories": {
+        "training": "training",
+        "models": "models",
+        "photos": "photos",
+        "static": "static",
+        "templates": "templates"
     }
 }

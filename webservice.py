@@ -40,12 +40,12 @@ def upload_image():
         folder = config.C['directories']['photos']
     while True:
         name = ''.join(tools.letter() for _ in range(50))
-        name = name + ext
+        name = '{}.{}'.format(name, ext)
         if name not in os.listdir(folder):
             break
     path = os.path.join(folder, name)
     img.save(path)
-    return {'ident': name}
+    return bottle.redirect('/')
 
 
 @app.post('/image/label')

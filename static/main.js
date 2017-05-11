@@ -53,7 +53,7 @@ $( document ).ready(function() {
             if($('#go_button').html() == 'Sign Up'){
                 alert("Signup Successful. You can login now.");
             } else {
-                document.user_token = data.token;
+                $("#usertoken").val(data.token);
                 currentuser(data.token);
             }
         });
@@ -63,20 +63,27 @@ $( document ).ready(function() {
         $("#posturl").val('/user/signup');
         $("#kind").css({"visibility":"visible","display":"block"});
         $("#go_button").html('Sign Up');
+        hideimageform();
         showinputform();
     });
     $("#login").click(function (){
         $("#posturl").val('/user/login');
         $("#kind").css({"visibility":"hidden","display":"none"});
         $("#go_button").html('Login');
+        hideimageform();
         showinputform();
     });
     $("#logout").click(function (){
         $("#posturl").val('/user/logout');
-        console.log(document.user_token);
-        var data = JSON.stringify({'token': document.user_token});
+        var token = $("#usertoken").val();
+        console.log(token);
+        var data = JSON.stringify({'token': token});
         var url = $("#posturl").val();
         postit(url, data, function(data) { console.log(data); });
         $("#username").html('ANON');
+    });
+    $("#imageupload").click(function (){
+        hideinputform();
+        showimageform();
     });
 });

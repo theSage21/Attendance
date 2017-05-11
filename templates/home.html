@@ -35,6 +35,7 @@
                     <b>Attendance</b>  -- [
                     <a href='/'>Home</a> ] - [
                     <a href='#' id='username'>ANON</a> ] - [
+                    <a href='#' id='imageupload'>Upload New Image</a> ] - [
                     <a href='#' id='signup'>Signup</a> ] - [
                     <a href='#' id='login'>Login</a> ] - [
                     <a href='#' id='logout'>Logout</a> ]
@@ -43,23 +44,22 @@
         </div>
         <hr>
         <div class='container'>
-            <div id = "imageform">
-                <form action="/image/upload" method="post" enctype="multipart/form-data">
-                    Select a file: <input type="file" name="upload" />
-                    <button value="Upload" />
+            <div id = "imageform" class='row'>
+                <form action='/image/upload' method="post" enctype="multipart/form-data" id='imageupload_form'>
+                    <input type="file" name="upload" class='six columns'/>
+                    <input type='hidden' name='token' value='' id='usertoken'/>
+                    <button id='imageuploadbutton' class='two columns'>Upload</button>
                 </form>
-                <hr>
             </div>
-            <div id = "inputform">
-                <input type = "text" id = "name" placeholder = "name" name = "name">
-                <select id='kind'>
+            <div id = "inputform" class='row'>
+                <input type = "text" id = "name" placeholder = "name" name = "name" class='two columns'>
+                <select id='kind' class='two columns'>
                     <option value='Student'>Student</option>
                     <option value='Teacher'>Teacher</option>
                 </select>
-                <input type = "password" id = "password" name = "upass" placeholder = "***">
+                <input type = "password" id = "password" name = "upass" placeholder = "********" class='two columns'>
                 <input type='hidden' val='' id='posturl'>
-                <button id='go_button'></button>
-            <hr>
+                <button id='go_button' class='two columns'></button>
             </div>
             <p>YEAH!</p>
         </div>
