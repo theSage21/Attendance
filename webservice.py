@@ -34,7 +34,15 @@ def home():
 
 @app.post('/image/upload')
 def upload_image():
-    return {'ident': None}
+    img = bottle.request.files.get('upload')
+    name = ''.join(tools.letter() for _ in range(50))
+    ext = img.filename.split('.')[-1]
+    name = name + ext
+    with tools.Config() as config:
+        folder = config.C['directories']['photos']
+        path = os.path.join(folder, name)
+    img.save(path)
+    return {'ident': name}
 
 
 @app.post('/image/label')
