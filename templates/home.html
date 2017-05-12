@@ -72,7 +72,15 @@
                 <center> <button id='gallery_button'>Remove marked Images</button></center>
             </div>
             <div class='container' id='TeacherGallery'>
-                
+                    <form action='/image/mark' method="post" enctype="multipart/form-data" id='imageupload_form'>
+                        <input type="file" name="upload" class='six columns'/>
+                        <input type='hidden' name='usertoken' value='' id='usertoken_teacher'/>
+                        <input type='text' name='lecture' id='lecture' placeholder='Lecture name'/>
+                        <button  class='two columns'>Upload</button>
+                    </form>
+                    <hr>
+                    <div id='PastGallery'>
+                    </div>
             </div>
             <p>This provides automated attendance for teacher-student settings.</p>
         </div>

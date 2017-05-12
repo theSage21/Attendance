@@ -45,6 +45,7 @@ $( document ).ready(function() {
         var url = '/user';
         var data = JSON.stringify({'token': token});
         $("#usertoken").val(token);
+        $("#usertoken_teacher").val(token);
         postit(url, data, function(data) {
             console.log(data); 
             if(data['status']){

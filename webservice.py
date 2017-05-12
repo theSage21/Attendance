@@ -67,7 +67,22 @@ def delete_images():
 @app.post('/image/mark')
 def mark_attendance():
     # Mark an image with attendance.
-    return {'present': []}
+    token = bottle.request.forms.get('usertoken')
+    if tools.get_user_details(token)[0]:
+        img = bottle.request.files.get('upload')
+        ext = img.filename.split('.')[-1]
+        with tools.Config() as config:
+            folder = config.C['directories']['photos']
+        while True:
+            name = ''.join(tools.letter() for _ in range(50))
+            name = '{}.{}'.format(name, ext)
+            if name not in os.listdir(folder):
+                break
+        path = os.path.join(folder, name)
+        img.save(path)
+        # CHANGE THIS: TODO, mark_attendance
+        tools.mark_attendance(path, token)
+    return bottle.redirect('/')
 
 
 @app.post('/user')

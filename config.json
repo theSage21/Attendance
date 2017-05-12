@@ -6,7 +6,9 @@
         "models": "models",
         "training": "training"
     },
-    "tokens": {},
+    "tokens": {
+        "flozs5e2nzdfvkc83m157m7ay6byikkxiarao41p8jajmq6sqa": "manni"
+    },
     "users": {
         "arjoonn": {
             "images": [],
@@ -21,5 +23,16 @@
             "labels": []
         }
     },
-    "a": 2
+    "lectures": {
+        "manni":{
+            "DSA1": {
+                "1494611913.94155": {
+                    "path": "photos/askdfjlasjdf.jpg",
+                    "names": [
+                        "arjoonn"
+                    ]
+                }
+            }
+        }
+    }
 }
