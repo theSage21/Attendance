@@ -30,11 +30,8 @@ def letter():
 
 def remove_image(images_to_remove, token):
     status = False
-    print(images_to_remove)
-    print(token)
     with Config() as config:
         if token in config.C['tokens'].keys():
-            print('token is in keys')
             name = config.C['tokens'][token]
             for path in images_to_remove:
                 config.C['users'][name]['images'].remove(path)
@@ -46,11 +43,7 @@ def add_image(path, token):
     with Config() as config:
         if token in config.C['tokens'].keys():
             name = config.C['tokens'][token]
-            print('appending path')
-            print(config.C['users'][name]['images'])
-            print('-'*100)
             config.C['users'][name]['images'].append(path)
-            print(config.C['users'][name]['images'])
 
 
 def get_user_details(token):
@@ -85,7 +78,6 @@ def login_user(username, password):
 def logout_user(token):
     with Config() as config:
         if token in config.C['tokens'].keys():
-            print('User token found. Logging out token {}'.format(token))
             config.C['tokens'].pop(token)
 
 
