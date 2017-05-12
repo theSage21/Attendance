@@ -1,3 +1,4 @@
+import os
 import json
 import random
 
@@ -8,6 +9,9 @@ class Config:
         self.path = path
 
     def load(self):
+        if not os.path.exists(self.path):
+            with open(self.path, 'w') as fl:
+                json.dump({}, fl)
         with open(self.path, 'r') as fl:
             self.C = json.loads(fl.read())
 

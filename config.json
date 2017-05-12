@@ -1,20 +1,19 @@
 {
     "directories": {
         "templates": "templates",
-        "training": "training",
         "models": "models",
+        "training": "training",
         "static": "static",
         "photos": "photos"
     },
+    "tokens": {},
     "users": {
         "arjoonn": {
-            "labels": [],
             "kind": "Student",
             "pwd": "sharma",
-            "images": [
-            ]
+            "labels": [],
+            "images": []
         }
     },
-    "tokens": {
-    }
+    "a": 2
 }
