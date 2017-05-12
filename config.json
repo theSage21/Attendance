@@ -14,6 +14,12 @@
             "pwd": "sharma",
             "kind": "Student",
             "labels": []
+        },
+        "manni": {
+            "pwd": "sharma",
+            "kind": "Teacher",
+            "images": [],
+            "labels": []
         }
     }
 }
