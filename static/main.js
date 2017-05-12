@@ -128,6 +128,19 @@ $( document ).ready(function() {
     }
     $("#gallery_button").click(function (){
         console.log($(".marked_for_removal"));  // TODO
-        console.log($(".userimage"));
+        var to_remove = [];
+        $('.marked_for_removal').map(function (index){
+            to_remove.push($(this).attr('src').slice(1)//removes the leading '/'
+            );
+        });
+        console.log(to_remove);
+        var data = JSON.stringify({'images_to_remove': to_remove, 'token': gettoken()});
+        var url = '/image/delete';
+        postit(url, data, function (data) {
+            console.log(data);
+            if(data['status']){
+                $('.marked_for_removal').remove();
+            }
+        });
     });
 });

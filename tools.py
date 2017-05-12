@@ -28,6 +28,20 @@ def letter():
     return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
 
 
+def remove_image(images_to_remove, token):
+    status = False
+    print(images_to_remove)
+    print(token)
+    with Config() as config:
+        if token in config.C['tokens'].keys():
+            print('token is in keys')
+            name = config.C['tokens'][token]
+            for path in images_to_remove:
+                config.C['users'][name]['images'].remove(path)
+            status = True
+    return status
+
+
 def add_image(path, token):
     with Config() as config:
         if token in config.C['tokens'].keys():

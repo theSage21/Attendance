@@ -52,6 +52,15 @@ def upload_image():
     return bottle.redirect('/')
 
 
+@app.post('/image/delete')
+def delete_images():
+    json = bottle.request.json
+    images_to_remove = json['images_to_remove']
+    token = json['token']
+    status = tools.remove_image(images_to_remove, token)
+    return {'status': status}
+
+
 @app.post('/image/label')
 def label_image():
     return {'status': 'Success'}
