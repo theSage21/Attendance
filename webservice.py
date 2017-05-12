@@ -29,11 +29,15 @@ app = bottle.Bottle()
 
 @app.get('/')
 def home():
+    # This is the main thing. Actually this is the only page on
+    # This entire site. Everything else is an API.
     return render('home.html')
 
 
 @app.post('/image/upload')
 def upload_image():
+    # I could not figure out how JSON file uploads worked.
+    # I'm sticking to form uploads for now.
     token = bottle.request.forms.get('usertoken')
     if tools.get_user_details(token)[0]:
         img = bottle.request.files.get('upload')
@@ -60,13 +64,9 @@ def delete_images():
     return {'status': status}
 
 
-@app.post('/image/label')
-def label_image():
-    return {'status': 'Success'}
-
-
 @app.post('/image/mark')
 def mark_attendance():
+    # Mark an image with attendance.
     return {'present': []}
 
 
