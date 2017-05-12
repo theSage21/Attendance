@@ -28,6 +28,19 @@ $( document ).ready(function() {
             }
         });
     }
+    function studentview(data){
+        console.log('adding images');
+        for(image of data['images']){
+            addtogallery(image);
+        }
+      $("#StudentImageGallery").fadeIn();
+      $("#StudentImageGallery").css({"visibility":"visible","display":"block"});
+    }
+    function teacherview(data){
+      $("#TeacherGallery").fadeIn();
+      $("#TeacherGallery").css({"visibility":"visible","display":"block"});
+    // TODO
+    }
     function currentuser(token){
         var url = '/user';
         var data = JSON.stringify({'token': token});
@@ -35,11 +48,13 @@ $( document ).ready(function() {
         postit(url, data, function(data) {
             console.log(data); 
             if(data['status']){
-                $("#username").html(data['name'] + ' ' + data['kind']);
-                console.log('adding images');
-                for(image of data['images']){
-                    addtogallery(image);
-                }
+                    $("#username").html(data['name'] + ' ' + data['kind']);
+                    if(data['kind'] == 'Student'){
+                        studentview(data);
+                    } else {
+                        teacherview(data);
+                        console.log('Teacher');
+                    }
             }
         });
     }

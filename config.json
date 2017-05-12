@@ -7,7 +7,6 @@
         "training": "training"
     },
     "tokens": {},
-    "a": 2,
     "users": {
         "arjoonn": {
             "images": [],
@@ -21,5 +20,6 @@
             "images": [],
             "labels": []
         }
-    }
+    },
+    "a": 2
 }
