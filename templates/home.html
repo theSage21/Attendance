@@ -34,7 +34,7 @@
                 <div class='twelve columns'>
                     <b>Attendance</b>  -- [
                     <a href='/'>Home</a> ] - [
-                    <a href='#' id='username'>ANON</a> ] - [
+                    <a href='#' id='username'>|Anon User|</a> ] - [
                     <a href='#' id='imageupload'>Upload New Image</a> ] - [
                     <a href='#' id='signup'>Signup</a> ] - [
                     <a href='#' id='login'>Login</a> ] - [
@@ -44,24 +44,31 @@
         </div>
         <hr>
         <div class='container'>
-            <div id = "imageform" class='row'>
-                <form action='/image/upload' method="post" enctype="multipart/form-data" id='imageupload_form'>
-                    <input type="file" name="upload" class='six columns'/>
-                    <input type='hidden' name='usertoken' value='' id='usertoken'/>
-                    <button id='imageuploadbutton' class='two columns'>Upload</button>
-                </form>
+            <div class='container'>
+                <div id = "imageform" class='row'>
+                    <form action='/image/upload' method="post" enctype="multipart/form-data" id='imageupload_form'>
+                        <input type="file" name="upload" class='six columns'/>
+                        <input type='hidden' name='usertoken' value='' id='usertoken'/>
+                        <button id='imageuploadbutton' class='two columns'>Upload</button>
+                    </form>
+                </div>
+                <div id = "inputform" class='row'>
+                    <input type = "text" id = "name" placeholder = "name" name = "name" class='two columns'>
+                    <select id='kind' class='two columns'>
+                        <option value='Student'>Student</option>
+                        <option value='Teacher'>Teacher</option>
+                    </select>
+                    <input type = "password" id = "password" name = "upass" placeholder = "********" class='two columns'>
+                    <input type='hidden' val='' id='posturl'>
+                    <button id='go_button' class='two columns'></button>
+                </div>
             </div>
-            <div id = "inputform" class='row'>
-                <input type = "text" id = "name" placeholder = "name" name = "name" class='two columns'>
-                <select id='kind' class='two columns'>
-                    <option value='Student'>Student</option>
-                    <option value='Teacher'>Teacher</option>
-                </select>
-                <input type = "password" id = "password" name = "upass" placeholder = "********" class='two columns'>
-                <input type='hidden' val='' id='posturl'>
-                <button id='go_button' class='two columns'></button>
-            </div>
-            <div id='gallery' class='row'>
+            <div class='container'>
+                <b>Gallery</b>
+                <hr>
+                <div id='gallery' class='row'>
+                </div>
+                <hr>
             </div>
             <p>YEAH!</p>
         </div>

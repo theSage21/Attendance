@@ -1,21 +1,19 @@
 {
-    "tokens": {
-        "1exeil6tkc7ldkl7llu63d2caq4e9ljug6dxg9o3v4dgsdnged": "arjoonn"
-    },
     "directories": {
-        "templates": "templates",
-        "static": "static",
-        "models": "models",
         "training": "training",
-        "photos": "photos"
+        "photos": "photos",
+        "static": "static",
+        "templates": "templates",
+        "models": "models"
     },
+    "tokens": {},
     "users": {
         "arjoonn": {
+            "labels": [],
             "images": [
             ],
-            "kind": "Student",
-            "labels": [],
-            "pwd": "sharma"
+            "pwd": "sharma",
+            "kind": "Student"
         }
     }
 }

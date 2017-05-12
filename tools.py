@@ -30,15 +30,15 @@ def letter():
 
 def add_image(path, token):
     with Config() as config:
-        if token in config.C['tokens']:
+        if token in config.C['tokens'].keys():
             name = config.C['tokens'][token]
             config.C['users'][name]['images'].append(path)
 
 
 def get_user_details(token):
     with Config() as config:
-        if token not in config.C['tokens']:
-            details, status = None, False
+        if token not in config.C['tokens'].keys():
+            details, status = dict(), False
         else:
             name = config.C['tokens'][token]
             details = dict(config.C['users'][name])
@@ -51,14 +51,14 @@ def get_user_details(token):
 def login_user(username, password):
     with Config() as config:
         token, status = None, None
-        if username in config.C['users']:
+        if username in config.C['users'].keys():
             pwd = config.C['users'][username]['pwd']
             status = (password == pwd)
         # ----------------
         if status:
             while True:
                 token = ''.join(letter() for _ in range(50))
-                if token not in config.C['tokens']:
+                if token not in config.C['tokens'].keys():
                     break
             config.C['tokens'][token] = username
     return status, token
@@ -66,13 +66,14 @@ def login_user(username, password):
 
 def logout_user(token):
     with Config() as config:
-        if token in config.C['tokens']:
+        if token in config.C['tokens'].keys():
+            print('User token found. Logging out token {}'.format(token))
             config.C['tokens'].pop(token)
 
 
 def add_user(name, password, kind):
     with Config() as config:
-        if name not in config.C['users']:
+        if name not in config.C['users'].keys():
             config.C['users'][name] = {'pwd': password,
                                        'kind': kind,
                                        'images': [],

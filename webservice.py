@@ -81,6 +81,7 @@ def user_login():
 def user_logout():
     json = bottle.request.json
     token = json['token']
+    print(token, '-'*10)
     tools.logout_user(token)
     return {'status': True}
 
@@ -92,6 +93,13 @@ def user_signup():
     status = tools.add_user(user, password, kind)
     return {'status': status}
 
+
+@app.get('/photos/<filename>')
+def image_server(filename):
+    print(filename)
+    with tools.Config() as config:
+        root = config.C['directories']['photos']
+    return bottle.static_file(filename, root=root)
 # --------------------------------------------------------------
 # --------------------------------------------------------------
 # ------------------MAIN

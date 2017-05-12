@@ -1,13 +1,36 @@
 $( document ).ready(function() {
     console.log( "ready!" );
-    document.user_token = null;
     // -----------------------------------------------------------------------
+    function deltoken(){
+        document.cookie = "usertoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+    }
+    function gettoken(){
+        var cookies = document.cookie.split('; ');
+        for(cook of cookies){
+            if(cook.includes('usertoken=')){
+                return cook.replace('usertoken=', '');
+            }
+        }
+        return null;
+    }
+    function addtogallery(path){
+        console.log(path);
+        $("#gallery").append('<img src="/'+path+'">');
+
+    }
     function currentuser(token){
         var url = '/user';
         var data = JSON.stringify({'token': token});
         postit(url, data, function(data) {
             console.log(data); 
-            $("#username").html(data['name'] + ' ' + data['kind']);
+            if(data['status']){
+                $("#username").html(data['name'] + ' ' + data['kind']);
+                console.log('adding images');
+                for(image of data['images']){
+                    addtogallery(image);
+                }
+            }
         });
     }
     function showimageform(){
@@ -52,8 +75,10 @@ $( document ).ready(function() {
             console.log(data); 
             if($('#go_button').html() == 'Sign Up'){
                 alert("Signup Successful. You can login now.");
-            } else {
+            } else if($('#go_button').html() == 'Login'){
+                deltoken();
                 $("#usertoken").val(data.token);
+                document.cookie = "usertoken="+data.token;
                 currentuser(data.token);
             }
         });
@@ -74,16 +99,21 @@ $( document ).ready(function() {
         showinputform();
     });
     $("#logout").click(function (){
-        $("#posturl").val('/user/logout');
-        var token = $("#usertoken").val();
+        var token = gettoken();
         console.log(token);
         var data = JSON.stringify({'token': token});
-        var url = $("#posturl").val();
+        var url = '/user/logout';
         postit(url, data, function(data) { console.log(data); });
-        $("#username").html('ANON');
+        $("#username").html('|Anon User|');
+        deltoken();
+        document.location.reload();
     });
     $("#imageupload").click(function (){
         hideinputform();
         showimageform();
     });
+    var token = gettoken();
+    if(token != null){
+        currentuser(token);
+    }
 });
