@@ -16,7 +16,17 @@ $( document ).ready(function() {
     }
     function addtogallery(path){
         console.log(path);
-        $("#gallery").append('<img src="/'+path+'" width=150px height=150px class="userimage">');
+        var elem = $('<img src="/'+path+'" width=150px height=150px class="userimage">');
+        $("#gallery").append(elem);
+        elem.click(function (){
+            if($(this).hasClass('marked_for_removal')){
+                console.log('Removed for removal');
+                $(this).removeClass('marked_for_removal');
+            }else{
+                console.log('Added for removal');
+                $(this).addClass('marked_for_removal');
+            }
+        });
     }
     function currentuser(token){
         var url = '/user';
@@ -118,5 +128,6 @@ $( document ).ready(function() {
     }
     $("#gallery_button").click(function (){
         console.log($(".marked_for_removal"));  // TODO
+        console.log($(".userimage"));
     });
 });
