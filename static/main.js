@@ -16,12 +16,12 @@ $( document ).ready(function() {
     }
     function addtogallery(path){
         console.log(path);
-        $("#gallery").append('<img src="/'+path+'">');
-
+        $("#gallery").append('<img src="/'+path+'" width=150px height=150px class="userimage">');
     }
     function currentuser(token){
         var url = '/user';
         var data = JSON.stringify({'token': token});
+        $("#usertoken").val(token);
         postit(url, data, function(data) {
             console.log(data); 
             if(data['status']){
@@ -116,4 +116,7 @@ $( document ).ready(function() {
     if(token != null){
         currentuser(token);
     }
+    $("#gallery_button").click(function (){
+        console.log($(".marked_for_removal"));  // TODO
+    });
 });

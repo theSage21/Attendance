@@ -32,7 +32,11 @@ def add_image(path, token):
     with Config() as config:
         if token in config.C['tokens'].keys():
             name = config.C['tokens'][token]
+            print('appending path')
+            print(config.C['users'][name]['images'])
+            print('-'*100)
             config.C['users'][name]['images'].append(path)
+            print(config.C['users'][name]['images'])
 
 
 def get_user_details(token):

@@ -34,19 +34,21 @@ def home():
 
 @app.post('/image/upload')
 def upload_image():
-    img = bottle.request.files.get('upload')
     token = bottle.request.forms.get('usertoken')
-    ext = img.filename.split('.')[-1]
-    with tools.Config() as config:
-        folder = config.C['directories']['photos']
-    while True:
-        name = ''.join(tools.letter() for _ in range(50))
-        name = '{}.{}'.format(name, ext)
-        if name not in os.listdir(folder):
-            break
-    path = os.path.join(folder, name)
-    img.save(path)
-    tools.add_image(path, token)
+    if tools.get_user_details(token)[0]:
+        img = bottle.request.files.get('upload')
+        ext = img.filename.split('.')[-1]
+        with tools.Config() as config:
+            folder = config.C['directories']['photos']
+        while True:
+            name = ''.join(tools.letter() for _ in range(50))
+            name = '{}.{}'.format(name, ext)
+            if name not in os.listdir(folder):
+                break
+        path = os.path.join(folder, name)
+        img.save(path)
+        print('Image saved to {}'.format(path))
+        tools.add_image(path, token)
     return bottle.redirect('/')
 
 

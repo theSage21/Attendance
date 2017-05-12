@@ -3,3 +3,7 @@
     visibility:hidden;
     display:none;
 }
+
+.userimage:hover { opacity: 0.9; }
+.marked_for_removal { opacity: 0.1; }
+.marked_for_removal:hover { opacity: 0.6; }
