@@ -7,7 +7,8 @@
         "training": "training"
     },
     "tokens": {
-        "flozs5e2nzdfvkc83m157m7ay6byikkxiarao41p8jajmq6sqa": "manni"
+        "flozs5e2nzdfvkc83m157m7ay6byikkxiarao41p8jajmq6sqa": "manni",
+        "ib0fav1n8et4rke5pdx7cfqeliz8wo1doeqd9fq495klm9avk6": "manni"
     },
     "users": {
         "arjoonn": {
@@ -24,13 +25,15 @@
         }
     },
     "lectures": {
-        "manni":{
-            "DSA1": {
-                "1494611913.94155": {
-                    "path": "photos/askdfjlasjdf.jpg",
-                    "names": [
-                        "arjoonn"
-                    ]
+        "manni": {
+            "LEC1": {
+                "1494704706.7879925": {
+                    "path": "photos/a6cvjlqmop5pvqk4ssy1wle02efwm574uvig67gdsm4hdfngiq.jpg",
+                    "names": []
+                },
+                "1494704716.8244517": {
+                    "path": "photos/1y7kskee1l3i60c9u36y0y2nknnfj0hizg4utjtsb2xn8qdps4.jpg",
+                    "names": []
                 }
             }
         }

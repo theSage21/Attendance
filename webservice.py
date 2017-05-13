@@ -68,6 +68,7 @@ def delete_images():
 def mark_attendance():
     # Mark an image with attendance.
     token = bottle.request.forms.get('usertoken')
+    lecture = bottle.request.forms.get('lecture')
     if tools.get_user_details(token)[0]:
         img = bottle.request.files.get('upload')
         ext = img.filename.split('.')[-1]
@@ -80,8 +81,7 @@ def mark_attendance():
                 break
         path = os.path.join(folder, name)
         img.save(path)
-        # CHANGE THIS: TODO, mark_attendance
-        tools.mark_attendance(path, token)
+        tools.mark_attendance(path, token, lecture)
     return bottle.redirect('/')
 
 

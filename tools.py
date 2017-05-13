@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import random
 
 
@@ -48,6 +49,19 @@ def add_image(path, token):
         if token in config.C['tokens'].keys():
             name = config.C['tokens'][token]
             config.C['users'][name]['images'].append(path)
+
+
+def mark_attendance(path, token, lecture):
+    with Config() as config:
+        if token in config.C['tokens'].keys():
+            name = config.C['tokens'][token]
+            stamp = time.time()
+            identified_people = []  # TODO: Identified people is the AI
+            attendance = {'path': path, 'names': identified_people}
+            if lecture not in config.C['lectures'][name].keys():
+                config.C['lectures'][name][lecture] = {stamp: attendance}
+            else:
+                config.C['lectures'][name][lecture][stamp] = attendance
 
 
 def get_user_details(token):
