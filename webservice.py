@@ -118,6 +118,14 @@ def user_signup():
     return {'status': status}
 
 
+@app.post('/user/register/class')
+def user_register_for_class():
+    json = bottle.request.json
+    token, req_teach, req_lec = json['token'], json['teacher'], json['lecture']
+    status = tools.register_request_for_class(token, req_teach, req_lec)
+    return {'status': status}
+
+
 @app.get('/photos/<filename>')
 def image_server(filename):
     with tools.Config() as config:
