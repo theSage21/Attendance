@@ -33,6 +33,23 @@ def letter():
     return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
 
 
+def register_for_class_request(token, teach, lec):
+    status = False
+    with Config() as config:
+        eligible = False
+        if token in config.C['tokens'].keys():
+            user = config.C['tokens'][token]
+            if teach in config.C['users'].keys():
+                if config.C['users'][teach]['kind'] == 'Teaccher':
+                    if lec in config.C['lectures'][teach].keys():
+                        eligible = True
+        if eligible:
+            config.C['lectures'][teach][lec]['__members__req'].append(user)
+        else:
+            status = False
+    return status
+
+
 def remove_image(images_to_remove, token):
     status = False
     with Config() as config:
@@ -59,7 +76,10 @@ def mark_attendance(path, token, lecture):
             identified_people = []  # TODO: Identified people is the AI
             attendance = {'path': path, 'names': identified_people}
             if lecture not in config.C['lectures'][name].keys():
-                config.C['lectures'][name][lecture] = {stamp: attendance}
+                lec = {stamp: attendance,
+                       '__members__': [],
+                       '__members__req': []}
+                config.C['lectures'][name][lecture] = lec
             else:
                 config.C['lectures'][name][lecture][stamp] = attendance
 
