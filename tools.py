@@ -33,6 +33,26 @@ def letter():
     return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
 
 
+def approve_user(token, user, lecture):
+    status = False
+    valid_request = False
+    with Config() as config:
+        if token in config.C['tokens'].keys():
+            teacher = config.C['tokens'][token]
+            if teacher in config.C['lectures'].keys():
+                if lecture in config.C['lectures'][teacher].keys():
+                    valid_request = True
+        if valid_request:
+            req_mems = config.C['lectures'][teacher][lecture]['__members__req']
+            if user in req_mems:
+                config.C['lectures'][teacher][lecture]['__members__req']\
+                      .remove(user)
+                config.C['lectures'][teacher][lecture]['__members__']\
+                      .append(user)
+                status = True
+    return status
+
+
 def get_pending_user_requests_to_join_class(token):
     status, pending = False, dict()
     with Config() as config:

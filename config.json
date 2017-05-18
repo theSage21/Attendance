@@ -1,50 +1,50 @@
 {
-    "directories": {
-        "models": "models",
-        "templates": "templates",
-        "training": "training",
-        "static": "static",
-        "photos": "photos"
+    "lectures": {
+        "manni": {
+            "phy1": {
+                "1495085765.7440193": {
+                    "names": [],
+                    "path": "photos/sz9l2vqi5skl4gb8pfr8qkb79dh5nhkod7a16nxxf31zl4rf9l.kdbx"
+                },
+                "__members__": [
+                    "arjoonn"
+                ],
+                "__members__req": []
+            },
+            "math2": {
+                "__members__": [
+                    "arjoonn"
+                ],
+                "1495089745.1460712": {
+                    "names": [],
+                    "path": "photos/82ze0nbk23b64uys5s0rilmn7lm6xglw8fc0a48zrsyvquzm1s.jpg"
+                },
+                "__members__req": []
+            }
+        }
     },
     "users": {
         "arjoonn": {
-            "kind": "Student",
             "pwd": "sharma",
-            "images": [
-                "photos/wg0d7klpmpt3hksnno2m6dwsahem8rhmiquvikk3g5lj784rxc.jpg"
-            ],
+            "kind": "Student",
+            "images": [],
             "labels": []
         },
         "manni": {
-            "kind": "Teacher",
             "pwd": "sharma",
+            "kind": "Teacher",
             "images": [],
             "labels": []
         }
     },
-    "lectures": {
-        "manni": {
-            "math2": {
-                "__members__": [],
-                "__members__req": [],
-                "1495089745.1460712": {
-                    "names": [],
-                    "path": "photos/82ze0nbk23b64uys5s0rilmn7lm6xglw8fc0a48zrsyvquzm1s.jpg"
-                }
-            },
-            "phy1": {
-                "__members__": [],
-                "__members__req": [
-                    "arjoonn"
-                ],
-                "1495085765.7440193": {
-                    "names": [],
-                    "path": "photos/sz9l2vqi5skl4gb8pfr8qkb79dh5nhkod7a16nxxf31zl4rf9l.kdbx"
-                }
-            }
-        }
+    "directories": {
+        "photos": "photos",
+        "static": "static",
+        "training": "training",
+        "templates": "templates",
+        "models": "models"
     },
     "tokens": {
-        "z7fi05cyk5hma8ejgjuis5kp09a7angh3g5or86z6183rhpb5q": "manni"
+        "f9qklupl7w1kzpqn3l40a6sw7cbflihimq3b4rtt6ppyo4e8oj": "manni"
     }
 }

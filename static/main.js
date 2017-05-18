@@ -33,23 +33,38 @@ $( document ).ready(function() {
         var data = JSON.stringify({'token': gettoken()});
         postit(url, data, function (data){
             console.log(data);
-            var lecture_tables = $("<div class='row'></div>");
-            lecture_tables.append('<h2>Classes Under Your Supervision</h2><sub>People in gray are pending requests. Click on them to accept them. Requests are flushed every week.</sub>');
-            $("#class_joining_requests").append(lecture_tables);
 
             if(data['status'] == true){
+                var lecture_tables = $("<div class='row'></div>");
+                lecture_tables.append('<div class="container"><h2>Classes Under Your Supervision</h2><sub>People in gray are pending requests. Click on them to accept them. Requests are flushed every week.</sub></div>');
+                $("#class_joining_requests").html('');
+                $("#class_joining_requests").append(lecture_tables);
                 // For each lecture
                 for (var lecture in data['lectures']) {
                     if (data['lectures'].hasOwnProperty(lecture)) {
-                        var table = $('<table class="two columns"></table>');
+                        var table = $('<table class="two columns container"></table>');
                         var thead = $("<thead><tr><th>"+lecture+"</th></tr></thead>");
                         var tbody = $("<tbody></tbody>");
                         table.append(thead);
                         table.append(tbody);
                         // For each request
                         for(name of data['lectures'][lecture]['req']){
-                            var name = $("<tr class='mem_req'><td>"+
+                            var name = $("<tr class='mem_req' parent='"+lecture+"'><td>"+
                                          name+"</td></tr>");
+                            name.click(function (){
+                                var name = $(this).html().replace('<td>', '').replace('</td>', '');
+                                var lec = $(this).attr('parent');
+                                var data = JSON.stringify({'token': gettoken(),
+                                    'user': name,
+                                    'lecture': lec});
+                                var url = '/user/request/approved';
+                                postit(url, data, function (data){
+                                    console.log(data);
+                                    if(data['status'] == true){
+                                        get_class_joining_requests();
+                                    }
+                                });
+                            });
                             tbody.append(name);
                         }
                         // For each member
@@ -62,11 +77,8 @@ $( document ).ready(function() {
                         lecture_tables.append(table);
                     }
                 }
-
-                $("#class_joining_requests")
             }
         });
-
     }
     function studentview(data){
         console.log('adding images');
