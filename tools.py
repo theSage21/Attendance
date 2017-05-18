@@ -33,21 +33,51 @@ def letter():
     return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
 
 
+def get_pending_user_requests_to_join_class(token):
+    status, pending = False, dict()
+    with Config() as config:
+        if token in config.C['tokens'].keys():
+            teacher = config.C['tokens'][token]
+            lectures = config.C['lectures'][teacher]
+            pending = {k: {'req': v['__members__req'],
+                           'mem': v['__members__']}
+                       for k, v in lectures.items()}
+            status = True
+    return status, pending
+
+
 def register_for_class_request(token, teach, lec):
     status = False
+    message = 'An unknown error occured'
     with Config() as config:
         eligible = False
         if token in config.C['tokens'].keys():
             user = config.C['tokens'][token]
             if teach in config.C['users'].keys():
-                if config.C['users'][teach]['kind'] == 'Teaccher':
+                if config.C['users'][teach]['kind'] == 'Teacher':
                     if lec in config.C['lectures'][teach].keys():
-                        eligible = True
+                        lecture = config.C['lectures'][teach][lec]
+                        mem = lecture['__members__']
+                        mem_req = lecture['__members__req']
+                        if user in mem:
+                            message = 'You are already in this class'
+                        elif user in mem_req:
+                            message = 'You have already requested'
+                        else:
+                            eligible = True
+                    else:
+                        message = 'This lecture does not exist'
+                else:
+                    message = 'This user is not a teacher'
+            else:
+                message = 'The user you mentioned as a Teacher does not exist'
+        else:
+            message = 'You are not logged in.'
         if eligible:
             config.C['lectures'][teach][lec]['__members__req'].append(user)
-        else:
-            status = False
-    return status
+            status = True
+            message = 'Successful request'
+    return status, message
 
 
 def remove_image(images_to_remove, token):

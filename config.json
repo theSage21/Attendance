@@ -1,41 +1,50 @@
 {
     "directories": {
-        "photos": "photos",
+        "training": "training",
         "templates": "templates",
-        "static": "static",
         "models": "models",
-        "training": "training"
-    },
-    "tokens": {
-        "flozs5e2nzdfvkc83m157m7ay6byikkxiarao41p8jajmq6sqa": "manni",
-        "ib0fav1n8et4rke5pdx7cfqeliz8wo1doeqd9fq495klm9avk6": "manni"
+        "static": "static",
+        "photos": "photos"
     },
     "users": {
         "arjoonn": {
-            "images": [],
-            "pwd": "sharma",
             "kind": "Student",
+            "pwd": "sharma",
+            "images": [
+                "photos/wg0d7klpmpt3hksnno2m6dwsahem8rhmiquvikk3g5lj784rxc.jpg"
+            ],
             "labels": []
         },
         "manni": {
-            "pwd": "sharma",
             "kind": "Teacher",
+            "pwd": "sharma",
             "images": [],
             "labels": []
         }
     },
     "lectures": {
         "manni": {
-            "LEC1": {
-                "1494704706.7879925": {
-                    "path": "photos/a6cvjlqmop5pvqk4ssy1wle02efwm574uvig67gdsm4hdfngiq.jpg",
-                    "names": []
-                },
-                "1494704716.8244517": {
-                    "path": "photos/1y7kskee1l3i60c9u36y0y2nknnfj0hizg4utjtsb2xn8qdps4.jpg",
-                    "names": []
+            "math2": {
+                "__members__": [],
+                "__members__req": [],
+                "1495089745.1460712": {
+                    "names": [],
+                    "path": "photos/82ze0nbk23b64uys5s0rilmn7lm6xglw8fc0a48zrsyvquzm1s.jpg"
+                }
+            },
+            "phy1": {
+                "__members__": [],
+                "__members__req": [
+                    "arjoonn"
+                ],
+                "1495085765.7440193": {
+                    "names": [],
+                    "path": "photos/sz9l2vqi5skl4gb8pfr8qkb79dh5nhkod7a16nxxf31zl4rf9l.kdbx"
                 }
             }
         }
+    },
+    "tokens": {
+        "z7fi05cyk5hma8ejgjuis5kp09a7angh3g5or86z6183rhpb5q": "manni"
     }
 }

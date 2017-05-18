@@ -62,6 +62,11 @@
                     <input type='hidden' val='' id='posturl'>
                     <button id='go_button' class='two columns'></button>
                 </div>
+                <div id="request_classform", class='row'>
+                    <input type = "text" id = "teachername_for_req" placeholder = "Teacher's Name" name = "teachername" class='three columns'>
+                    <input type='text' name='lecture' id='lecturename_for_req' placeholder='Lecture Name'/ class='three columns'>
+                    <button class='four columns' id='class_attendance_button'>Request to Attend Class</button>
+                </div>
             </div>
             <div class='container' id='StudentImageGallery'>
                 <h2>Image Gallery</h2><sub> Click on an image to mark/unark it for removal.</sub>
@@ -72,6 +77,7 @@
                 <center> <button id='gallery_button'>Remove marked Images</button></center>
             </div>
             <div class='container' id='TeacherGallery'>
+                <h2>Upload today's attendance</h2>
                     <form action='/image/mark' method="post" enctype="multipart/form-data" id='imageupload_form'>
                         <input type="file" name="upload" class='six columns'/>
                         <input type='hidden' name='usertoken' value='' id='usertoken_teacher'/>
@@ -79,8 +85,10 @@
                         <button  class='two columns'>Upload</button>
                     </form>
                     <hr>
-                    <div id='PastGallery'>
+                    <div id='PastGallery'> <!-- TODO -->
                     </div>
+            </div>
+            <div class='container' id='class_joining_requests'>
             </div>
             <p>This provides automated attendance for teacher-student settings.</p>
         </div>

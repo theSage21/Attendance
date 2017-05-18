@@ -118,12 +118,21 @@ def user_signup():
     return {'status': status}
 
 
-@app.post('/user/register/class')
+@app.post('/user/request/class')
 def user_register_for_class():
     json = bottle.request.json
     token, req_teach, req_lec = json['token'], json['teacher'], json['lecture']
-    status = tools.register_request_for_class(token, req_teach, req_lec)
-    return {'status': status}
+    status, message = tools.register_for_class_request(token,
+                                                       req_teach, req_lec)
+    return {'status': status, 'message': message}
+
+
+@app.post('/user/request/approval')
+def user_class_request_approval():
+    json = bottle.request.json
+    token = json['token']
+    status, users = tools.get_pending_user_requests_to_join_class(token)
+    return {'status': status, 'lectures': users}
 
 
 @app.get('/photos/<filename>')

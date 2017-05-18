@@ -28,6 +28,46 @@ $( document ).ready(function() {
             }
         });
     }
+    function get_class_joining_requests(){
+        var url = '/user/request/approval';
+        var data = JSON.stringify({'token': gettoken()});
+        postit(url, data, function (data){
+            console.log(data);
+            var lecture_tables = $("<div class='row'></div>");
+            lecture_tables.append('<h2>Classes Under Your Supervision</h2><sub>People in gray are pending requests. Click on them to accept them. Requests are flushed every week.</sub>');
+            $("#class_joining_requests").append(lecture_tables);
+
+            if(data['status'] == true){
+                // For each lecture
+                for (var lecture in data['lectures']) {
+                    if (data['lectures'].hasOwnProperty(lecture)) {
+                        var table = $('<table class="two columns"></table>');
+                        var thead = $("<thead><tr><th>"+lecture+"</th></tr></thead>");
+                        var tbody = $("<tbody></tbody>");
+                        table.append(thead);
+                        table.append(tbody);
+                        // For each request
+                        for(name of data['lectures'][lecture]['req']){
+                            var name = $("<tr class='mem_req'><td>"+
+                                         name+"</td></tr>");
+                            tbody.append(name);
+                        }
+                        // For each member
+                        for(name of data['lectures'][lecture]['mem']){
+                            var name = $("<tr class='mem_approved'><td>"+
+                                         name+"</td></tr>");
+                            tbody.append(name);
+                        }
+                        console.log(lecture + " -> " + data['lectures'][lecture]);
+                        lecture_tables.append(table);
+                    }
+                }
+
+                $("#class_joining_requests")
+            }
+        });
+
+    }
     function studentview(data){
         console.log('adding images');
         for(image of data['images']){
@@ -35,10 +75,15 @@ $( document ).ready(function() {
         }
       $("#StudentImageGallery").fadeIn();
       $("#StudentImageGallery").css({"visibility":"visible","display":"block"});
+      $("#request_classform").fadeIn();
+      $("#request_classform").css({"visibility":"visible","display":"block"});
     }
     function teacherview(data){
       $("#TeacherGallery").fadeIn();
       $("#TeacherGallery").css({"visibility":"visible","display":"block"});
+      $("#class_joining_requests").fadeIn();
+      $("#class_joining_requests").css({"visibility":"visible","display":"block"});
+      get_class_joining_requests();
     // TODO
     }
     function currentuser(token){
@@ -156,6 +201,21 @@ $( document ).ready(function() {
             console.log(data);
             if(data['status']){
                 $('.marked_for_removal').remove();
+            }
+        });
+    });
+    $("#class_attendance_button").click(function (){
+        var data = JSON.stringify({'token': gettoken(),
+            'teacher': $('#teachername_for_req').val(),
+            'lecture': $('#lecturename_for_req').val()
+        });
+        console.log(data);
+        var url = '/user/request/class';
+        postit(url, data, function (data){
+            if(data['status'] == true){
+                alert('Your request was successful. The teacher needs to accept your request');
+            }else{
+                alert(data['message']);
             }
         });
     });
