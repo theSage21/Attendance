@@ -1,50 +1,48 @@
 {
-    "tokens": {},
+    "directories": {
+        "static": "static",
+        "models": "models",
+        "photos": "photos",
+        "training": "training",
+        "templates": "templates"
+    },
     "lectures": {
         "vani": {
-            "crypto101": {
-                "1495095467.462752": {
-                    "names": [],
-                    "path": "photos/imvnufnd33ft1kqjlny33s1rnd9cvwdr8xsxyh1t6atd9jogj8.jpg"
-                },
-                "__members__": [
-                    "arjoonn"
-                ],
-                "__members__req": []
-            },
             "math101": {
                 "__members__": [
                     "arjoonn"
                 ],
                 "__members__req": [],
                 "1495095454.4708905": {
-                    "names": [],
-                    "path": "photos/tln2f0ll3l0k1f7tmlglvmopc5r1t0oe47blakykiln6jcbwf9.jpg"
+                    "path": "photos/tln2f0ll3l0k1f7tmlglvmopc5r1t0oe47blakykiln6jcbwf9.jpg",
+                    "names": []
                 }
+            },
+            "crypto101": {
+                "1495095467.462752": {
+                    "path": "photos/imvnufnd33ft1kqjlny33s1rnd9cvwdr8xsxyh1t6atd9jogj8.jpg",
+                    "names": []
+                },
+                "__members__": [
+                    "arjoonn"
+                ],
+                "__members__req": []
             }
         }
     },
+    "tokens": {},
     "users": {
-        "vani": {
-            "kind": "Teacher",
-            "labels": [],
-            "pwd": "asdf",
-            "images": []
-        },
         "arjoonn": {
             "kind": "Student",
-            "labels": [],
             "pwd": "asdf",
-            "images": [
-                "photos/o9kj41lbe71qx60cyhahiozxwmqppio7pvfcnv5eu8kbi8qd0m.jpg"
-            ]
+            "labels": [],
+            "images": []
+        },
+        "vani": {
+            "kind": "Teacher",
+            "pwd": "asdf",
+            "labels": [],
+            "images": []
         }
-    },
-    "directories": {
-        "static": "static",
-        "photos": "photos",
-        "training": "training",
-        "templates": "templates",
-        "models": "models"
     }
 }
