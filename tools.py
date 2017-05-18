@@ -2,6 +2,7 @@ import os
 import json
 import time
 import random
+import pandas as pd
 
 
 class Config:
@@ -31,6 +32,27 @@ class Config:
 
 def letter():
     return random.choice('asdfghjklqwertyuiopmnzxcvb1234567890')
+
+
+def generate_excel_for_user(token, lec):
+    status, path = False, '/'
+    with Config() as config:
+        if token in config.C['tokens'].keys():
+            tch = config.C['tokens'][token]
+            if lec in config.C['lectures'][tch].keys():
+                mem = config.C['lectures'][tch][lec]['__members__']
+                data = []
+                for key, value in config.C['lectures'][tch][lec].items():
+                    if key[0] != '_':
+                        attended = value['names']
+                        vector = [i in attended for i in mem]
+                        data.append([float(key)] + vector)
+                path = ''.join([letter() for _ in range(20)]) + '.csv'
+                fpath = os.path.join(config.C['directories']['static'], path)
+                df = pd.DataFrame(data, columns=['datetime']+mem)
+                df.to_csv(fpath, index=False)
+                status = True
+    return status, path
 
 
 def approve_user(token, user, lecture):
@@ -122,6 +144,8 @@ def mark_attendance(path, token, lecture):
     with Config() as config:
         if token in config.C['tokens'].keys():
             name = config.C['tokens'][token]
+            if name not in config.C['lectures'].keys():
+                config.C['lectures'][name] = dict()
             stamp = time.time()
             identified_people = []  # TODO: Identified people is the AI
             attendance = {'path': path, 'names': identified_people}

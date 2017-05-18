@@ -36,7 +36,7 @@ $( document ).ready(function() {
 
             if(data['status'] == true){
                 var lecture_tables = $("<div class='row'></div>");
-                lecture_tables.append('<div class="container"><h2>Classes Under Your Supervision</h2><sub>People in gray are pending requests. Click on them to accept them. Requests are flushed every week.</sub></div>');
+                lecture_tables.append('<div class="container"><h2>Lectures Under Your Supervision</h2><sub>People in gray are pending requests. Click on them to accept them. Requests are flushed every week.</sub></div>');
                 $("#class_joining_requests").html('');
                 $("#class_joining_requests").append(lecture_tables);
                 // For each lecture
@@ -228,6 +228,22 @@ $( document ).ready(function() {
                 alert('Your request was successful. The teacher needs to accept your request');
             }else{
                 alert(data['message']);
+            }
+        });
+    });
+    $("#generate_excel").click(function (){
+        var lecture = $("#lecture_name_for_report_generation").val();
+        var data = JSON.stringify({'token': gettoken(), 'lecture': lecture});
+        console.log(data);
+        var url = '/user/excelgen';
+        postit(url, data, function(data){
+            console.log(data);
+            if (data['status'] == true){
+                console.log('status is true');
+                $("#download_link_for_excel").html('');
+                var link = $("<a href='/static/"+ data['message'] + "'>Download "+data['message']+"</a>");
+                $("#download_link_for_excel").append(link);
+
             }
         });
     });

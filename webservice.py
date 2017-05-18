@@ -143,6 +143,14 @@ def user_class_request_approved():
     return {'status': status}
 
 
+@app.post('/user/excelgen')
+def generate_excel_for_user():
+    json = bottle.request.json
+    token, lec = json['token'], json['lecture']
+    status, filepath = tools.generate_excel_for_user(token, lec)
+    return {'status': status, 'message': filepath}
+
+
 @app.get('/photos/<filename>')
 def image_server(filename):
     with tools.Config() as config:

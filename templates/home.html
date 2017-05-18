@@ -77,13 +77,22 @@
                 <center> <button id='gallery_button'>Remove marked Images</button></center>
             </div>
             <div class='container' id='TeacherGallery'>
-                <h2>Upload today's attendance</h2>
+                <div class='row'>
+                    <center><h2>Generate an Excel File</h2></center>
+                        <input id='lecture_name_for_report_generation' placeholder='Lecture Name' class='three columns' type='text'/>
+                        <button id='generate_excel' class='four columns'>Generate Excel File</button>
+                        <div id='download_link_for_excel' class='two columns'></div>
+
+                </div>
+                <center class='row'>
+                    <h2>Upload Today's Attendance</h2>
                     <form action='/image/mark' method="post" enctype="multipart/form-data" id='imageupload_form'>
-                        <input type="file" name="upload" class='six columns'/>
                         <input type='hidden' name='usertoken' value='' id='usertoken_teacher'/>
-                        <input type='text' name='lecture' id='lecture' placeholder='Lecture name'/>
                         <button  class='two columns'>Upload</button>
+                        <input type='text' name='lecture' id='lecture' placeholder='Lecture name'/ class='three columns'>
+                        <input type="file" name="upload" class='six columns'/>
                     </form>
+                </center>
                     <hr>
                     <div id='PastGallery'> <!-- TODO -->
                     </div>
