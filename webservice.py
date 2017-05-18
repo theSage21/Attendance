@@ -135,6 +135,14 @@ def user_class_request_approval():
     return {'status': status, 'lectures': users}
 
 
+@app.post('/user/request/approved')
+def user_class_request_approved():
+    json = bottle.request.json
+    token, user, lecture = json['token'], json['user'], json['lecture']
+    status = tools.approve_user(token, user, lecture)
+    return {'status': status}
+
+
 @app.get('/photos/<filename>')
 def image_server(filename):
     with tools.Config() as config:

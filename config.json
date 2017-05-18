@@ -1,8 +1,8 @@
 {
     "directories": {
-        "training": "training",
-        "templates": "templates",
         "models": "models",
+        "templates": "templates",
+        "training": "training",
         "static": "static",
         "photos": "photos"
     },
