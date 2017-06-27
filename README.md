@@ -1,6 +1,8 @@
 Attendance
 ==========
 
+*WIP* This repo is under 'cleanup-and-transfer' from the undocumented code base it initially lived as. Expect it to be polished and ready for industrial use in a few weeks.
+
 Automated image based attendance for classroom / office settings.
 
 Todo
